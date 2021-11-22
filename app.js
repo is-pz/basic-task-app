@@ -89,26 +89,6 @@ taskForm.addEventListener("submit", async function (e) {
 });
 //--------------------------------
 
-//Funcion para la edicion de tareas
-document.onclick = async function (e) {
-  if (e.target.classList.contains("task-item")) {
-    let element = e.target.parentElement.parentElement;
-    let id = element.getAttribute("taskId");
-    var data = new FormData();
-    data.append("id", id);
-    const options = {
-      method: "POST",
-      body: data,
-    };
-
-    var task = await sendRequest("./task-single.php", options);
-    document.getElementById("task-id").value = task.id;
-    document.getElementById("name").value = task.name;
-    document.getElementById("description").value = task.description;
-    edit = true;
-  }
-};
-
 //Evento para el boton de eliminar tareas eliminar tareas
 document.onclick = async function (e) {
   if (e.target.classList.contains("task-delete")) {
@@ -125,6 +105,22 @@ document.onclick = async function (e) {
       await sendRequest("./task-delete.php", options);
       fetchTask();
     }
+    // Evento para agregar tareas
+  } else if (e.target.classList.contains("task-item")) {
+    let element = e.target.parentElement.parentElement;
+    let id = element.getAttribute("taskId");
+    var data = new FormData();
+    data.append("id", id);
+    const options = {
+      method: "POST",
+      body: data,
+    };
+
+    var task = await sendRequest("./task-single.php", options);
+    document.getElementById("task-id").value = task.id;
+    document.getElementById("name").value = task.name;
+    document.getElementById("description").value = task.description;
+    edit = true;
   }
 };
 //--------------------------------
