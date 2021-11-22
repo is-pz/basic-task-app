@@ -89,27 +89,6 @@ taskForm.addEventListener("submit", async function (e) {
 });
 //--------------------------------
 
-//Evento para el boton de eliminar tareas eliminar tareas
-document.onclick = async function (e) {
-  console.log(e);
-  if (e.target.classList.contains("task-delete")) {
-    if (confirm("Are you sure you want to delete this task?")) {
-      let element = e.target.parentElement.parentElement;
-      let id = element.getAttribute("taskId");
-      var data = new FormData();
-      data.append("id", id);
-      const options = {
-        method: "POST",
-        body: data,
-      };
-
-      await sendRequest("./task-delete.php", options);
-      fetchTask();
-    }
-  }
-};
-//--------------------------------
-
 //Funcion para la edicion de tareas
 document.onclick = async function (e) {
   if (e.target.classList.contains("task-item")) {
@@ -129,3 +108,23 @@ document.onclick = async function (e) {
     edit = true;
   }
 };
+
+//Evento para el boton de eliminar tareas eliminar tareas
+document.onclick = async function (e) {
+  if (e.target.classList.contains("task-delete")) {
+    if (confirm("Are you sure you want to delete this task?")) {
+      let element = e.target.parentElement.parentElement;
+      let id = element.getAttribute("taskId");
+      var data = new FormData();
+      data.append("id", id);
+      const options = {
+        method: "POST",
+        body: data,
+      };
+
+      await sendRequest("./task-delete.php", options);
+      fetchTask();
+    }
+  }
+};
+//--------------------------------
