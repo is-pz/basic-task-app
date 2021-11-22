@@ -21,5 +21,5 @@ if(!empty($search)){
     }
 
     $jsonString = json_encode($json);
-    echo $jsonString;
+    echo  $jsonString;
 }

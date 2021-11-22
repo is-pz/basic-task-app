@@ -12,5 +12,13 @@ if(isset($_POST['name'])){
     if(!$result){
         die("Query Failed.");
     }
-    echo 'Task Added Successfully';
+
+    $json = array(
+        'status' => 1,
+        'message' => 'Task Added Successfully'
+    );
+
+    $jsonString = json_encode($json);
+
+    echo $jsonString;
 }

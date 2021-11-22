@@ -14,5 +14,14 @@
             die("Query Failed.");
         }
 
-        echo "Update Task Successfully";
+
+        $json = array(
+            'status' => 1,
+            'message' => "Update Task Successfully"
+        );
+    
+        $jsonString = json_encode($json);
+    
+        echo $jsonString;
+
     }
